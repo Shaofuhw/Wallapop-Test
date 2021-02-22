@@ -1,15 +1,39 @@
 # MY SOLUTION
 
-For my solution, I kept the input from the console, although this could be change to retrieve the data either from a 
-file or an API
+My solution is build with Kotlin as the reduced boilerplate needed makes
+working with it quite more pleasant than vanilla Java.
 
-The "Map" class contains a static Builder. Calling the setup will ask for the data from the console,
-both X and Y size.
+I decided to divide the classes by their own functionality as much as possible.
 
-Same goes for the Rover. Calling the setup will ask for the initial position and orientation.
+There are 4 main things in the program:
+ - Rover:
+    - Holds movement logic
+ - Mars Map:
+    - Holds Map size and list of obstacles
+ - Coordinates:
+    - Holds current position of the rover
+ - ConsoleUtils:
+    - Helps with the retrieval of the data from the console
+    
+Both Rover and Map have a static method "Builder.setup()" that will
+ask all the required data from the console.
 
-There are 3 enums that list all the possible options for Orientation, ConsoleInputTypes and RoverCommands.
-Having this in an enum reduces the chances of typing an option wrong.
+For the obstacles, there is a "generateRandomObstacles" inside the Map class
+as asking for this data from the console is cumbersome. There is a "setObstacles"
+so the data can be imported from different places like files or APIs.
 
-All methods are Unit Tested. Including console input and output data.
+There are a few Enums that list the types of ConsoleInputs, Rover
+Orientations and Rover Commands to make the conditionals easier to handle.
 
+As for the console input, there is a check for valid data, like typing characters
+or negative numbers on mapSize, so it will keep asking the user for valid data.
+
+Lastly, there are unit tests for most classes and methods.
+ - ConsoleUtilsTests checks the console input and output values
+ - CoordinatesTests checks that values are properly updated in the case the value
+ is over the mapSize
+ - MapTest checks the Setup and obstacle detection
+ - RoverTest checks all the commands. 
+ 
+I did not include the compiled self-executable file, but it should be
+as simple as compile the project to create a .jar file.
